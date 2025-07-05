@@ -1,4 +1,4 @@
-# AI/ML/RL
+# AI
 
 Notes on the field of artifical intelligence & machine learning on the AWS cloud.
 
