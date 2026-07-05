@@ -1,0 +1,12 @@
+# Environments / secrets
+.venv/
+.env
+
+# uv
+# (uv.lock IS committed — it locks dependency versions)
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
