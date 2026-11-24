@@ -1,0 +1,7 @@
+jupyterlab
+torch
+torchvision
+numpy
+matplotlib
+opencv-python
+graphviz

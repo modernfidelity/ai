@@ -77,7 +77,7 @@ def start_instance():
                     print(f"Error: Model requested tool '{func_name}', but it isn't in your tool file.")
         else:
             # Standard conversational response if no tool was required
-            print(f"\Gemma 4: {response['message']['content']}")
+            print(f"\nGemma 4: {response['message']['content']}")
             messages.append(response["message"])
 
 if __name__ == "__main__":

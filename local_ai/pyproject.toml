@@ -1,7 +1,7 @@
 [project]
-name = "toolings"
+name = "local-ai"
 version = "0.1.0"
-description = "Add your description here"
+description = "Tool-calling agent experiments with local models (Ollama / Gemma) and Claude."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

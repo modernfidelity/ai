@@ -1,85 +1,32 @@
-# AI
+# openai_symfony
 
-Notes on the field of artifical intelligence & machine learning on the AWS cloud.
+A Python implementation of **Symphony**, a coding-agent orchestration service, built with Claude Code. The package lives in [`symfony-python/`](symfony-python/).
 
-A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience
+## How it works
 
-## Applications
+- Reads a `WORKFLOW.md` file (YAML front matter for config + a Jinja2 prompt template) and hot-reloads it on change
+- Polls a [Linear](https://linear.app) project for issues (`LINEAR_API_KEY`)
+- For each issue, creates an isolated workspace and runs a coding agent through `codex app-server`
+- Optional HTTP status server (`--port`)
 
-- Recommendation Engines
-- Demand Forecasting
-- Computer Vision
-- Fraud Detection
-- Medical Diagnosis
-- Stock Market Forecasting
-- Sentiment Analysis 
+> **Trust posture:** the agent auto-approves its actions and assumes a high-trust environment. Only run it against repos and trackers you control.
 
-## Concepts 
+## Setup
 
-Terminology 
+```bash
+cd openai_symfony/symfony-python
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+```
 
-- **Features**
-    - Each item or piece of data is described by a number of features 
-- **Labels**
-    - Each item or piece of data may be tagged with a known classification result
-- **Instances**
-    - An instance or sample is an item within the dataset, each instance will have a set features, and may also have a label assigned to it. 
+## Run
 
+```bash
+export LINEAR_API_KEY=...
+.venv/bin/symphony path/to/WORKFLOW.md --port 8080
+```
 
-**Learning Phases**
+## Test
 
-1. Dataset Collection
-2. Featurisation
-3. Model Training
-4. Model Testing
-5. Best Model
-
-## Machine Learning Types
-
-### Supervised Learning
-Create a predictive machine learning models using both features and labels. 
-
-- Processes past observations 
-- Train Models
-- Mapping Function
-    - Features > Labels 
-- Predict future outcomes (Labels)
-
-**Problem Types**
-
-1. If the output Label is categorical then use a classification model
-2. If the output Label is numeric then use a regression model
-
-- **Classification**
-    - If the output data mapping is discreet i.e. is cat ? 
-    - Types of Algorithms 
-        - Linear Regression
-        - Logisitc Regression
-        - Support Vector Machines
-        - Naive Bayes
-        - K Nearest Neighbour
-        - Decision Trees
-        - Random Forest
-- **Regression**
-    - If the output data mapping is continuous i.e. +7.5 Celsius 
-    - Types of Algorithms 
-        - Linear Regression
-        - Decision Trees
-        - Random Forest
-
-The above can be used to solve many business problems
-- How much is this home worth ? 
-- How many customers will watch season 2 ?
-- Is this cancer malignant ? 
-- Will this customer default on a loan ? 
-
-
-**Datasets**
-
-Data split into a basic 80% 20% share, where 80% is used for training and 20% for testing. (More phases recommended)
-
-### Unsupervised Learning
-Group and discover patterns based only on features
-
-- Clustering
-
+```bash
+.venv/bin/pytest
+```

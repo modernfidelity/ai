@@ -13,7 +13,7 @@ Each folder is a self-contained experiment.
 | [`mcp-server/`](mcp-server/) | Local MCP server for Claude Code with 7 example tools: pure Python, local filesystem/system info and a third-party REST API (FX rates) | Python, `uv`, FastMCP |
 | [`notebooks/`](notebooks/) | Jupyter notebooks covering tensors, perceptrons, MLPs, neural networks and object detection | PyTorch, torchvision |
 | [`vision/`](vision/) | Computer vision experiments: RegNet image classification (pretrained and from scratch) | PyTorch, torchvision |
-| [`openai_symfony/`](openai_symfony/) | OpenAI Symfony and Claude Code experiments (`symfony/`, `symfony-python/`) | Python |
+| [`openai_symfony/`](openai_symfony/) | Symphony: a coding-agent orchestrator that polls Linear issues and runs Codex agents in isolated workspaces | Python, asyncio, aiohttp, pytest |
 
 ## Getting started
 
