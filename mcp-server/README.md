@@ -1,8 +1,17 @@
 # mcp-server
 
-A minimal [FastMCP](https://gofastmcp.com) server exposing a few example
-tools (`add`, `list_directory`, `read_text_file`, `system_info`,
-`roll_dice`) that Claude Code can call locally over stdio.
+A minimal [FastMCP](https://gofastmcp.com) server exposing example tools
+that Claude Code can call locally over stdio (or HTTP).
+
+| Tool | Type | What it does |
+|------|------|--------------|
+| `add` | Pure Python | Adds two numbers |
+| `roll_dice` | Pure Python | Rolls `count` dice with `sides` faces |
+| `working_days_between` | Pure Python | Counts Mon–Fri days between two ISO dates |
+| `list_directory` | Local filesystem | Lists a directory's contents |
+| `read_text_file` | Local filesystem | Reads a text file, truncated to `max_chars` |
+| `system_info` | Local machine | OS, release, architecture, Python version |
+| `get_exchange_rate` | Third-party REST API | Latest FX rate from the free [Frankfurter API](https://frankfurter.dev) (no key needed) |
 
 ## Setup
 
@@ -18,18 +27,25 @@ uv sync
 ## Run standalone (optional, for testing)
 
 ```bash
-uv run mcp-local-tools-server.py
+uv run mcp-local-tools-server.py          # stdio
+uv run mcp-local-tools-server.py --http   # HTTP on http://127.0.0.1:8000
 ```
 
-It will sit waiting for MCP messages on stdio — that's expected, it's
-meant to be launched by an MCP client, not used interactively.
+Over stdio it sits waiting for MCP messages. That's expected: it's meant
+to be launched by an MCP client, not used interactively.
+
+## Test
+
+```bash
+uv run smoke_test.py   # calls every tool in-process; get_exchange_rate needs network
+```
 
 ## Register with Claude Code
 
-From any directory, run:
+From inside this folder, run:
 
 ```bash
-claude mcp add local-tools -- uv run --project /path/to/ai/mcp-server /path/to/ai/mcp-server/mcp-local-tools-server.py
+claude mcp add local-tools -- uv run --project "$(pwd)" "$(pwd)/mcp-local-tools-server.py"
 ```
 
 Then start/restart Claude Code and the tools will be available.
@@ -41,7 +57,7 @@ available in every project, or `-s project` to check it into this repo's
 `.mcp.json` and share it with anyone who clones it:
 
 ```bash
-claude mcp add -s user local-tools -- uv run --project /path/to/ai/mcp-server /path/to/ai/mcp-server/server.py
+claude mcp add -s user local-tools -- uv run --project "$(pwd)" "$(pwd)/mcp-local-tools-server.py"
 ```
 
 Useful follow-ups:

@@ -1,7 +1,19 @@
+"""Local tools MCP server.
+
+Run it:
+
+    uv run mcp-local-tools-server.py          # stdio (for Claude Code / Claude Desktop)
+    uv run mcp-local-tools-server.py --http   # HTTP on http://127.0.0.1:8000
+"""
+
 import platform
 import random
+import sys
+from datetime import date, timedelta
 from pathlib import Path
+from typing import Any
 
+import httpx
 from fastmcp import FastMCP
 
 mcp = FastMCP("Local Tools")
@@ -48,5 +60,51 @@ def roll_dice(sides: int = 6, count: int = 1) -> list[int]:
     return [random.randint(1, sides) for _ in range(count)]
 
 
+@mcp.tool
+def working_days_between(start: str, end: str) -> dict[str, Any]:
+    """Count working days (Mon-Fri) between two ISO dates (YYYY-MM-DD),
+    inclusive of start, exclusive of end."""
+    start_d = date.fromisoformat(start)
+    end_d = date.fromisoformat(end)
+    if end_d < start_d:
+        raise ValueError("`end` must not be before `start`.")
+
+    working = 0
+    cursor = start_d
+    while cursor < end_d:
+        if cursor.weekday() < 5:  # 0=Mon .. 4=Fri
+            working += 1
+        cursor += timedelta(days=1)
+
+    return {
+        "start": start,
+        "end": end,
+        "working_days": working,
+        "calendar_days": (end_d - start_d).days,
+    }
+
+
+@mcp.tool
+def get_exchange_rate(base: str = "USD", target: str = "GBP") -> dict[str, Any]:
+    """Fetch the latest exchange rate between two currency codes (e.g. USD, GBP)
+    from the free Frankfurter API (https://frankfurter.dev). No API key needed."""
+    base, target = base.upper(), target.upper()
+    with httpx.Client(timeout=10.0) as client:
+        resp = client.get(
+            "https://api.frankfurter.dev/v1/latest",
+            params={"base": base, "symbols": target},
+        )
+        resp.raise_for_status()
+        data = resp.json()
+
+    rate = data.get("rates", {}).get(target)
+    if rate is None:
+        raise ValueError(f"No rate returned for {base}->{target}. Check currency codes.")
+    return {"base": base, "target": target, "rate": rate, "as_of": data.get("date")}
+
+
 if __name__ == "__main__":
-    mcp.run()
+    if "--http" in sys.argv:
+        mcp.run(transport="http", host="127.0.0.1", port=8000)
+    else:
+        mcp.run()  # stdio

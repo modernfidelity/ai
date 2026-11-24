@@ -10,8 +10,7 @@ Each folder is a self-contained experiment.
 |---|---|---|
 | [`eval/`](eval/) | Learning Claude eval tooling: a phased [plan](eval/plan.md), [progress tracker](eval/progress.md) and per-phase [write-ups](eval/docs/) | Python, `uv`, Anthropic SDK, `claude -p` |
 | [`local_ai/`](local_ai/) | Tool-calling agent experiments with local models (Ollama / Gemma) and Claude | Python, `uv`, LangChain, LangGraph, Ollama |
-| [`mcp-server/`](mcp-server/) | Minimal MCP server with example local tools (`add`, `list_directory`, `read_text_file`, `system_info`, `roll_dice`) for Claude Code | Python, `uv`, FastMCP |
-| [`tools/mcp-server/`](tools/mcp-server/) | Example MCP server showing three tool patterns: Databricks SQL, a pure-Python function and a third-party REST API | Python, `uv`, FastMCP |
+| [`mcp-server/`](mcp-server/) | Local MCP server for Claude Code with 7 example tools: pure Python, local filesystem/system info and a third-party REST API (FX rates) | Python, `uv`, FastMCP |
 | [`notebooks/`](notebooks/) | Jupyter notebooks covering tensors, perceptrons, MLPs, neural networks and object detection | PyTorch, torchvision |
 | [`vision/`](vision/) | Computer vision experiments: RegNet image classification (pretrained and from scratch) | PyTorch, torchvision |
 | [`openai_symfony/`](openai_symfony/) | OpenAI Symfony and Claude Code experiments (`symfony/`, `symfony-python/`) | Python |
