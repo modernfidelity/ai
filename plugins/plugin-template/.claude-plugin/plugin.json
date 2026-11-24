@@ -1,0 +1,9 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "plugin-template",
+  "version": "0.1.0",
+  "description": "A starting-point Claude Code plugin with one skill, one subagent and a SessionStart hook.",
+  "author": {
+    "name": "Your Name"
+  }
+}

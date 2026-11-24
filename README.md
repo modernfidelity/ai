@@ -14,6 +14,8 @@ Each folder is a self-contained experiment.
 | [`notebooks/`](notebooks/) | Jupyter notebooks covering tensors, perceptrons, MLPs, neural networks and object detection | PyTorch, torchvision |
 | [`vision/`](vision/) | Computer vision experiments: RegNet image classification (pretrained and from scratch) | PyTorch, torchvision |
 | [`openai_symfony/`](openai_symfony/) | Symphony: a coding-agent orchestrator that polls Linear issues and runs Codex agents in isolated workspaces | Python, asyncio, aiohttp, pytest |
+| [`skills/`](skills/) | Claude Code skills, starting from [`skill-template`](skills/skill-template/) (SKILL.md, reference file, helper script) | Markdown, Python |
+| [`plugins/`](plugins/) | Claude Code plugins, starting from [`plugin-template`](plugins/plugin-template/) (manifest, skill, subagent, SessionStart hook) | JSON, Markdown, Python |
 
 ## Getting started
 
@@ -25,3 +27,7 @@ pip install -r requirements.txt    # projects with only a requirements.txt
 ```
 
 Where a folder has a README, it explains how to run that project.
+
+## License
+
+[MIT](LICENSE), except where a folder says otherwise.
