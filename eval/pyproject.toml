@@ -1,0 +1,9 @@
+[project]
+name = "eval"
+version = "0.1.0"
+description = "Learning Claude eval tooling"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=1.0",
+]

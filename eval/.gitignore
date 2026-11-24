@@ -1,0 +1,4 @@
+# Raw eval run output — commit summaries deliberately, not by default
+results/
+**/results/
+.env

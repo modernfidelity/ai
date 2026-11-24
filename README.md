@@ -1,4 +1,4 @@
-# AI
+# AI Sandbox
 
 Notes on the field of artifical intelligence & machine learning on the AWS cloud.
 
