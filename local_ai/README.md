@@ -11,7 +11,7 @@ Tool-calling agent experiments: the same "model decides to call a Python functio
 | `gemma_tools.py` | Gemma 4 (Ollama) | Single hard-coded question; raw `ollama.chat` with one tool (`calculate_shipping`) |
 | `runner.py` | Gemma 4 (Ollama) | Interactive chat loop; auto-registers every function in `my_tools.py` as a tool |
 | `ollama_agent.py` | Gemma 4 (Ollama) | LangChain `create_agent` with one `@tool` (`get_weather`); the diagram above |
-| `claude_agent.py` | Claude (Anthropic API) | Interactive LangChain agent using the tools in `my_tools.py` |
+| `claude_agent.py` | Claude Sonnet 5.5 (Anthropic API) | Interactive LangChain agent using the tools in `my_tools.py` |
 | `my_tools.py` | — | Mock tools (`fetch_local_weather`, `search_text_file`) shared by `runner.py` and `claude_agent.py` |
 
 ## Setup

@@ -17,12 +17,14 @@ def load_tools(module):
     return tools
 
 
-def start_instance(model_name="claude-sonnet-4-6"):
+def start_instance(model_name="claude-sonnet-5-5"):
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise SystemExit("Set ANTHROPIC_API_KEY before running claude_agent.py")
 
     tools = load_tools(my_tools)
-    model = ChatAnthropic(model=model_name)
+    # Sonnet 5.5 thinks adaptively by default and thinking counts toward
+    # max_tokens, so allow more than LangChain's 4096 default.
+    model = ChatAnthropic(model=model_name, max_tokens=16000)
     agent = create_agent(model, tools)
 
     print("=" * 50)
