@@ -12,6 +12,8 @@ Jupyter notebooks working through deep learning fundamentals with PyTorch.
 
 The PNGs are network diagrams generated while working through these notebooks.
 
+`tensor_tutorial.ipynb` is based on PyTorch's [Tensors tutorial](https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html) (BSD-3-Clause, © PyTorch contributors).
+
 ## Setup
 
 ```bash
