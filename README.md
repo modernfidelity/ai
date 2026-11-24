@@ -1,85 +1,28 @@
 # AI Sandbox
 
-Notes on the field of artifical intelligence & machine learning on the AWS cloud.
+A personal sandbox for hands-on experiments with AI and machine learning: evaluating models, building agents and tool calling, running MCP servers, neural network notebooks and computer vision.
 
-A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience
+## Projects
 
-## Applications
+Each folder is a self-contained experiment.
 
-- Recommendation Engines
-- Demand Forecasting
-- Computer Vision
-- Fraud Detection
-- Medical Diagnosis
-- Stock Market Forecasting
-- Sentiment Analysis 
+| Folder | What it is | Stack |
+|---|---|---|
+| [`eval/`](eval/) | Learning Claude eval tooling: a phased [plan](eval/plan.md), [progress tracker](eval/progress.md) and per-phase [write-ups](eval/docs/) | Python, `uv`, Anthropic SDK, `claude -p` |
+| [`local_ai/`](local_ai/) | Tool-calling agent experiments with local models (Ollama / Gemma) and Claude | Python, `uv`, LangChain, LangGraph, Ollama |
+| [`mcp-server/`](mcp-server/) | Minimal MCP server with example local tools (`add`, `list_directory`, `read_text_file`, `system_info`, `roll_dice`) for Claude Code | Python, `uv`, FastMCP |
+| [`tools/mcp-server/`](tools/mcp-server/) | Example MCP server showing three tool patterns: Databricks SQL, a pure-Python function and a third-party REST API | Python, `uv`, FastMCP |
+| [`notebooks/`](notebooks/) | Jupyter notebooks covering tensors, perceptrons, MLPs, neural networks and object detection | PyTorch, torchvision |
+| [`vision/`](vision/) | Computer vision experiments: RegNet image classification (pretrained and from scratch) | PyTorch, torchvision |
+| [`openai_symfony/`](openai_symfony/) | OpenAI Symfony and Claude Code experiments (`symfony/`, `symfony-python/`) | Python |
 
-## Concepts 
+## Getting started
 
-Terminology 
+Python projects are set up independently. From inside a project folder:
 
-- **Features**
-    - Each item or piece of data is described by a number of features 
-- **Labels**
-    - Each item or piece of data may be tagged with a known classification result
-- **Instances**
-    - An instance or sample is an item within the dataset, each instance will have a set features, and may also have a label assigned to it. 
+```bash
+uv sync                            # projects with a pyproject.toml
+pip install -r requirements.txt    # projects with only a requirements.txt
+```
 
-
-**Learning Phases**
-
-1. Dataset Collection
-2. Featurisation
-3. Model Training
-4. Model Testing
-5. Best Model
-
-## Machine Learning Types
-
-### Supervised Learning
-Create a predictive machine learning models using both features and labels. 
-
-- Processes past observations 
-- Train Models
-- Mapping Function
-    - Features > Labels 
-- Predict future outcomes (Labels)
-
-**Problem Types**
-
-1. If the output Label is categorical then use a classification model
-2. If the output Label is numeric then use a regression model
-
-- **Classification**
-    - If the output data mapping is discreet i.e. is cat ? 
-    - Types of Algorithms 
-        - Linear Regression
-        - Logisitc Regression
-        - Support Vector Machines
-        - Naive Bayes
-        - K Nearest Neighbour
-        - Decision Trees
-        - Random Forest
-- **Regression**
-    - If the output data mapping is continuous i.e. +7.5 Celsius 
-    - Types of Algorithms 
-        - Linear Regression
-        - Decision Trees
-        - Random Forest
-
-The above can be used to solve many business problems
-- How much is this home worth ? 
-- How many customers will watch season 2 ?
-- Is this cancer malignant ? 
-- Will this customer default on a loan ? 
-
-
-**Datasets**
-
-Data split into a basic 80% 20% share, where 80% is used for training and 20% for testing. (More phases recommended)
-
-### Unsupervised Learning
-Group and discover patterns based only on features
-
-- Clustering
-
+Where a folder has a README, it explains how to run that project.
